@@ -674,7 +674,7 @@ static PERSONALITY_PTR PERSONALITY_create(const char* deviceName, const char* de
                     /*it is all fine*/
                     result->broker = moduleHandleData->broker;
                     result->module = moduleHandleData;
-                    if (moduleHandleData->transportProvider==MQTT_Protocol)
+                    if (moduleHandleData->transportProvider==MQTT_Protocol || moduleHandleData->transportProvider==AMQP_Protocol)
                     {
                         // add twin properties and invoke method call back
                         if (IoTHubClient_SetDeviceTwinCallback(result->iothubHandle, IoTHub_TwinPropertiesCallback, result) != IOTHUB_CLIENT_OK)
@@ -691,7 +691,7 @@ static PERSONALITY_PTR PERSONALITY_create(const char* deviceName, const char* de
                             }
                             else
                             {
-                                LogInfo("Current Protocol is MQTT so that Device Twin Callback registrated.");
+                                LogInfo("Current Protocol is MQTT or AMQP so that Device Twin Callback registrated.");
                             }
                         }
                     }
